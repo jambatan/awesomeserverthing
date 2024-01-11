@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Your Web App - Edit Purchase Order</title>
+</head>
+<body>
+    <%- include('common/header') %>
+
+    <div class="content">
+        <h1>Edit Purchase Order</h1>
+        
+        <!-- Purchase Order Details Form -->
+        <form action="/purchaseOrders/edit/<%= orderId %>" method="POST" class="data-form">
+            <label for="customer">Customer:</label>
+            <select name="customer" id="customer">
+                <!-- Populate with customer options -->
+                <option value="">Select Customer</option>
+                <% customers.forEach((customer) => { %>
+                    <option value="<%= customer.CustomerID %>"><%= customer.CustomerName %></option>
+                <% }); %>
+                <!-- Add more customer options here -->
+            </select>
+            <label for="orderDate">Order Date:</label>
+            <input type="date" name="orderDate" id="orderDate" value="<%= orderDate %>">
+            <label for="purchaseOrderNumber">Purchase Order Number:</label>
+            <input type="text" name="purchaseOrderNumber" id="purchaseOrderNumber" value="<%= purchaseOrderNumber %>">
+            <label for="jobNumber">Job Number:</label>
+            <input type="text" name="jobNumber" id="jobNumber" value="<%= jobNumber %>">
+            <label for="status">Status:</label>
+            <select name="status" id="status">
+                <!-- Populate with status options -->
+                <option value="Pending">Pending</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Completed">Completed</option>
+                <!-- Add more status options here -->
+            </select>
+            <button type="submit" name="editPurchaseOrder">Edit Purchase Order</button>
+        </form>
+
+        <!-- Deliveries Section -->
+        <h2>Deliveries</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Delivery ID</th>
+                    <th>Delivery Date</th>
+                    <th>Part</th>
+                    <th>Quantity</th>
+                    <!-- Add more delivery-related headers as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate and display existing deliveries associated with the purchase order -->
+                <% deliveries.forEach((delivery) => { %>
+                    <tr>
+                        <td><%= delivery.DeliveryID %></td>
+                        <td><%= delivery.DeliveryDate %></td>
+                        <td><%= delivery.PartName %></td>
+                        <td><%= delivery.Quantity %></td>
+                        <!-- Add more delivery-related columns as needed -->
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <!-- Form to Add More Deliveries -->
+        <h3>Add Delivery</h3>
+        <form action="/purchaseOrders/addDelivery/<%= orderId %>" method="POST" class="data-form">
+            <label for="newDeliveryDate">Delivery Date:</label>
+            <input type="date" name="newDeliveryDate" id="newDeliveryDate">
+            <label for="part">Part:</label>
+            <select name="part" id="part">
+                <!-- Populate with part options -->
+                <option value="">Select Part</option>
+                <% parts.forEach((part) => { %>
+                    <option value="<%= part.PartID %>"><%= part.PartName %></option>
+                <% }); %>
+            </select>
+            <label for="newQuantity">Quantity:</label>
+            <input type="number" name="newQuantity" id="newQuantity" min="1">
+            <!-- Add more input fields for other delivery-related data as needed -->
+            <!-- Include an input field to select the purchase order ID -->
+            <input type="hidden" name="orderId" value="<%= orderId %>">
+            <button type="submit" name="addDelivery">Add Delivery</button>
+        </form>
+    </div>
+
+    <%- include('common/footer') %>
+</body>
+</html>

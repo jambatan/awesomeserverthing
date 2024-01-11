@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Purchase Orders</title>
+</head>
+<body>
+    <%- include('common/header') %>
+
+    <div class="content">
+        <h1>Purchase Orders</h1>
+        <div class="filter-section">
+            <label for="customerFilter">Customer:</label>
+            <select name="customerFilter" id="customerFilter">
+                <option value="">All Customers</option>
+                <% customers.forEach((customer) => { %>
+                    <option value="<%= customer.CustomerName %>"><%= customer.CustomerName %></option>
+                <% }); %>
+            </select>
+            <label for="startDate">Start Date:</label>
+            <input type="date" name="startDate" id="startDate" placeholder="Start Date">
+            <label for="endDate">End Date:</label>
+            <input type="date" name="endDate" id="endDate" placeholder="End Date">
+            <button type="button">Apply Filters</button>
+        </div>
+
+        <!-- Form for adding new purchase orders -->
+        <form action="/purchaseOrders/add" method="POST">
+            <label for="customer">Customer:</label>
+            <select name="customer" id="customer">
+                <% customers.forEach((customer) => { %>
+                    <option value="<%= customer.CustomerName %>"><%= customer.CustomerName %></option>
+                <% }); %>
+            </select>
+
+            <label for="orderDate">Order Date:</label>
+            <input type="date" name="orderDate" id="orderDate" required>
+            <label for="purchaseOrderNumber">Purchase Order Number:</label>
+            <input type="text" name="purchaseOrderNumber" id="purchaseOrderNumber" required>
+            <label for="jobNumber">Job Number:</label>
+            <input type="text" name="jobNumber" id="jobNumber" required>
+            <label for="status">Status:</label>
+            <select name="status" id="status" required>
+                <option value="Pending">Pending</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Completed">Completed</option>
+            </select>
+            <button type="submit">Add Order</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="display: none;">Order ID</th>
+                    <th>Customer</th>
+                    <th>Order Date</th>
+                    <th>Purchase Order Number</th>
+                    <th>Job Number</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through purchase orders and display them in rows -->
+                <% purchaseOrders.forEach((order) => { %>
+                <tr>
+                    <td style="display: none;"><%= order.OrderID %></td>
+                    <td><%= order.CustomerId %>"><%= order.CustomerName %></td>
+                    <td><%= order.OrderDate %></td>
+                    <td><%= order.PurchaseOrderNumber %></td>
+                    <td><%= order.JobNumber %></td>
+                    <td><%= order.Status %></td>
+                    <td>
+                        <a href="/purchaseOrders/edit/<%= order.OrderID %>">Edit</a>
+                        <a href="/purchaseOrders/delete/<%= order.OrderID %>" class="delete-button">Delete</a>
+                        <!-- Add other actions here, e.g., generate invoice -->
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <%- include('common/footer') %>
+</body>
+</html>

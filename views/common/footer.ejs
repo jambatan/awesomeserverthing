@@ -1,0 +1,37 @@
+<footer>
+    <div class="footer-container">
+        <p>&copy; <%= new Date().getFullYear() %> Sager Paint and Refinishing</p>
+    </div>
+    <div class="dark-mode-selector">
+        <input type="checkbox" class="dark-mode-toggle" id="darkModeToggle">
+        <label for="darkModeToggle" class="dark-mode-label">Dark Mode</label>
+    </div>
+</footer>
+<!-- Dark Mode JavaScript -->
+<script>
+    // Function to toggle dark mode
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode-body'); // Toggle dark mode class
+      const isDarkMode = body.classList.contains('dark-mode-body');
+
+      // Store the dark mode preference in localStorage
+      localStorage.setItem('darkMode', isDarkMode);
+    }
+
+    // Function to initialize dark mode based on stored preference
+    function initializeDarkMode() {
+      const storedDarkMode = localStorage.getItem('darkMode');
+      if (storedDarkMode === 'true') {
+        // Enable dark mode if stored preference is 'true'
+        document.body.classList.add('dark-mode-body');
+      }
+    }
+
+    // Add event listener for dark mode toggle
+    const darkModeToggle = document.querySelector('.dark-mode-toggle');
+    darkModeToggle.addEventListener('change', toggleDarkMode);
+
+    // Initialize dark mode based on stored preference when the page loads
+    window.addEventListener('load', initializeDarkMode);
+</script>

@@ -1,0 +1,182 @@
+/* Default Styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Dark Mode Selector */
+.dark-mode-selector {
+    text-align: right;
+    margin-top: 10px;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+/* Style the label for the dark mode toggle */
+.dark-mode-label {
+    position: relative;
+    padding-left: 44px; /* Adjust the padding as needed */
+    cursor: pointer;
+}
+
+/* Style the switch background (off state) */
+.dark-mode-label::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px; /* Adjust the size as needed */
+    height: 20px; /* Adjust the size as needed */
+    background-color: #ccc; /* Background color when not checked (light mode) */
+    border-radius: 20px; /* Half of the height to create a round shape */
+    transition: background-color 0.3s;
+}
+
+/* Style the switch slider (thumb) */
+.dark-mode-label::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px; /* Adjust the size as needed */
+    height: 16px; /* Adjust the size as needed */
+    background-color: white; /* Slider color when not checked (light mode) */
+    border-radius: 50%;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+/* Style the checkbox indicator when checked */
+.dark-mode-toggle:checked + .dark-mode-label::before {
+    background-color: #007bff; /* Background color when checked (dark mode) */
+}
+
+/* Move the slider to the right when checked (dark mode) */
+.dark-mode-toggle:checked + .dark-mode-label::after {
+    transform: translateX(20px); /* Equal to switch background width - slider width */
+    background-color: #333; /* Slider color when checked (dark mode) */
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+/* Add styles for table rows in dark mode */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Add styles for table rows in dark mode */
+.dark-mode-body tr:nth-child(even) {
+    background-color: #444;
+    color: white; /* Change text color for better visibility */
+}
+
+/* Buttons in Tables */
+.table-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Forms for Entering Data */
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Navigation Buttons */
+.navigation-menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.navigation-menu li {
+    margin-right: 10px;
+}
+
+.navigation-menu li:last-child {
+    margin-right: 0;
+}
+
+.navigation-menu a {
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+/* Dark Mode Styles */
+.dark-mode-body {
+    background-color: #333;
+    color: white;
+}
+
+/* Add styles for table headers in dark mode */
+.dark-mode-table th {
+    background-color: #555;
+    color: white;
+}
+
+/* Add styles for table rows in dark mode */
+.dark-mode-table tr:nth-child(even) {
+    background-color: #444;
+    color: white;
+}
+
+.dark-mode-button {
+    background-color: #333;
+    color: white;
+    border: 1px solid white;
+}
+
+/* Add styles for form container in dark mode */
+.dark-mode-form-container {
+    border: 1px solid #555;
+}
